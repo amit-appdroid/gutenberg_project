@@ -44,6 +44,8 @@ public class BookListActivity extends AppCompatActivity {
     private androidx.appcompat.widget.SearchView searchView;
 
     String genreName;
+    int pageNum = 2;
+    private boolean isLastItemVisible = false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -77,19 +79,21 @@ public class BookListActivity extends AppCompatActivity {
 
         booksRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                int visibleItemCount = layoutManager.getChildCount();
+                //int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
-                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                //int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
 
-                // Check if the last item is visible and not currently loading more data
-                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
-                    // End of items reached, fetch new data
+                isLastItemVisible = (lastVisibleItemPosition == totalItemCount - 1);
+
+                if (isLastItemVisible) {
                     fetchMoreBooksData(genreName);
                 }
+
             }
         });
 
@@ -134,8 +138,56 @@ public class BookListActivity extends AppCompatActivity {
     }
 
     private void fetchMoreBooksData(String genreName) {
-        String nextPageUrl = "https://gutendex.com/books/?page=2&topic="+ genreName.toLowerCase();
-        getBooks(nextPageUrl);
+        String nextPageUrl = "https://gutendex.com/books/?page="+pageNum+"&topic="+ genreName.toLowerCase();
+        pageNum++;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, nextPageUrl, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    JSONArray resultArray = response.getJSONArray("results");
+
+                    for (int i = 0; i < resultArray.length(); i++){
+                        BookHolder bookHolder = new BookHolder();
+                        JSONObject bookObjectData = resultArray.getJSONObject(i);
+
+                        bookHolder.setTitle(bookObjectData.getString("title"));
+
+                        JSONArray authorsArray = bookObjectData.getJSONArray("authors");
+                        JSONObject authorObject = authorsArray.getJSONObject(0);
+                        bookHolder.setAuthorName(authorObject.getString("name"));
+
+                        JSONObject formatObject = bookObjectData.getJSONObject("formats");
+                        bookHolder.setCoverImage(formatObject.getString("image/jpeg"));
+                        bookHolder.setHtmlLink(formatObject.getString("text/html"));
+                        if (formatObject.has("text/plain")) {
+                            bookHolder.setPlainLink(formatObject.getString("text/plain"));
+                        }else if (formatObject.has("text/plain; charset=us-ascii")){
+                            bookHolder.setPlainLink(formatObject.getString("text/plain; charset=us-ascii"));
+                        }else if (formatObject.has("text/plain; charset=utf-8")){
+                            bookHolder.setPlainLink(formatObject.getString("text/plain; charset=utf-8"));
+                        }
+                        booksAdapter.notifyDataSetChanged();
+
+                        bookList.add(bookHolder);
+                        scrollViewLayout.setVisibility(View.VISIBLE);
+                        progress_layout.setVisibility(View.GONE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        Volley.newRequestQueue(BookListActivity.this).add(request);
+
     }
 
     private void prepareLink(String genreName) {

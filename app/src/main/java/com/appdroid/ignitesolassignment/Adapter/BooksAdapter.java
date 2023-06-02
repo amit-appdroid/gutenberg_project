@@ -56,7 +56,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder>{
                 if (!bookHolder.getHtmlLink().equals("") || bookHolder.getHtmlLink() != null) {
                     openCustomTab((Activity) context, customIntent.build(), Uri.parse(bookHolder.getHtmlLink()));
                 }else{
-                    openCustomTab((Activity) context, customIntent.build(), Uri.parse(bookHolder.get()));
+                    openCustomTab((Activity) context, customIntent.build(), Uri.parse(bookHolder.getHtmlLink()));
                 }
             }
         });
