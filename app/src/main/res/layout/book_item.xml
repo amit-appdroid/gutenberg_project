@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bookItemLayout"
+    android:foreground="@drawable/ripple_effect"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
+        android:elevation="3dp"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/bookImage"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/bookTitle"
+        android:text="@string/book_name"
+        android:textColor="@color/accent"
+        android:textSize="13sp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/authorName"
+        android:text="@string/book_name"
+        android:textColor="@color/accent"
+        android:textSize="12sp"
+        android:fontFamily="@font/montserrat"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

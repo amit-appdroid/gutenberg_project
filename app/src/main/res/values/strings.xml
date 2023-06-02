@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Gutenberg Project</string>
+    <string name="app_description">A social cataloging website that allows you to freely search its database of books, annotations, and reviews.</string>
+    <string name="gutenberg_project">Gutenberg Project</string>
+    <string name="genre_name">GENRE NAME</string>
+    <string name="fiction">FICTION</string>
+    <string name="drama">DRAMA</string>
+    <string name="humor">HUMOR</string>
+    <string name="politics">POLITICS</string>
+    <string name="philosophy">PHILOSOPHY</string>
+    <string name="history">HISTORY</string>
+    <string name="adventure">ADVENTURE</string>
+    <string name="search">Search</string>
+    <string name="book_name">Book Name</string>
+    <string name="fiction_link">https://gutendex.com/books/?topic=fiction</string>
+    <string name="drama_link">https://gutendex.com/books/?topic=drama</string>
+    <string name="humor_link">https://gutendex.com/books/?topic=humor</string>
+    <string name="politics_link">https://gutendex.com/books/?topic=politics</string>
+    <string name="philosophy_link">https://gutendex.com/books/?topic=philosophy</string>
+    <string name="history_link">https://gutendex.com/books/?topic=history</string>
+    <string name="adventure_link">https://gutendex.com/books/?topic=adventure</string>
+</resources>
