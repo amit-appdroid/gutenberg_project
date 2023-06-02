@@ -112,22 +112,6 @@ public class BookListActivity extends AppCompatActivity {
 
         prepareLink(genreName);
 
-        /*if (genreName.toLowerCase().equals("fiction")){
-            getBooks("https://gutendex.com/books/?topic=fiction");
-        }else if (genreName.toLowerCase().equals("drama")){
-            getBooks("https://gutendex.com/books/?topic=drama");
-        }else if (genreName.toLowerCase().equals("humor")){
-            getBooks("https://gutendex.com/books/?topic=humor");
-        }else if (genreName.toLowerCase().equals("politics")){
-            getBooks("https://gutendex.com/books/?topic=politics");
-        }else if (genreName.toLowerCase().equals("philosophy")){
-            getBooks("https://gutendex.com/books/?topic=philosophy");
-        }else if (genreName.toLowerCase().equals("history")){
-            getBooks("https://gutendex.com/books/?topic=history");
-        }else if (genreName.toLowerCase().equals("adventure")){
-            getBooks("https://gutendex.com/books/?topic=adventure");
-        }*/
-
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

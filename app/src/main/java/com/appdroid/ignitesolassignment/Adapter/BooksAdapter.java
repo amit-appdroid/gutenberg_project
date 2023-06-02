@@ -63,22 +63,13 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.ViewHolder>{
     }
 
     public static void openCustomTab(Activity activity, CustomTabsIntent customTabsIntent, Uri uri) {
-        // package name is the default package
-        // for our custom chrome tab
+
         String packageName = "com.android.chrome";
         if (packageName != null) {
-            // we are checking if the package name is not null
-            // if package name is not null then we are calling
-            // that custom chrome tab with intent by passing its
-            // package name.
             customTabsIntent.intent.setPackage(packageName);
 
-            // in that custom tab intent we are passing
-            // our url which we have to browse.
             customTabsIntent.launchUrl(activity, uri);
         } else {
-            // if the custom tabs fails to load then we are simply
-            // redirecting our user to users device default browser.
             activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
     }

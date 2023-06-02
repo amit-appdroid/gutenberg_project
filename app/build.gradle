@@ -33,13 +33,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'androidx.browser:browser:1.5.0'     // used to open custom browser tab
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'com.android.volley:volley:1.2.1'    // used for scheduling network requests.
     implementation 'com.github.bumptech.glide:glide:4.15.1' //used for implementing images from urls into imageview.
-    implementation 'com.airbnb.android:lottie:5.2.0'    //used for implementing animation.
+    implementation 'com.airbnb.android:lottie:5.2.0'    //used for implementing animations.
 
 }
